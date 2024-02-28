@@ -16,7 +16,7 @@ export const GameStatusMessage = ({
     message = `${winner} won!`;
   } else {
     if (isGameFinished) {
-      message = 'nobody won';
+      message = "nobody won :'(";
     } else {
       message = `player ${currentPlayer === 'x' ? 'o' : 'x'}, your move`;
     }
