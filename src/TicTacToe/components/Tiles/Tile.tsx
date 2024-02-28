@@ -6,7 +6,7 @@ interface TileProps {
   clickable: boolean;
 }
 
-export const Tile = ({ content, onClick, clickable = true }: TileProps) => {
+export const Tile = ({ content, onClick, clickable }: TileProps) => {
   return (
     <div
       onClick={clickable ? onClick : () => {}}
@@ -19,7 +19,7 @@ export const Tile = ({ content, onClick, clickable = true }: TileProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        cursor: clickable ? 'pointer' : 'not-allowed',
+        cursor: clickable ? 'pointer' : 'default',
       }}>
       {content}
     </div>

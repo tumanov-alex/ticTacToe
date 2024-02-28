@@ -13,6 +13,8 @@ export const Tiles = ({
   tilesDisplay,
   setTilesData,
 }: TilesProps) => {
+  const gameStarted = (new Set(tiles)).size > 2;
+
   const onSetTiles = (tileId: number) => {
     if (tiles[tileId] !== null) {
       return;
@@ -44,7 +46,7 @@ export const Tiles = ({
         <Tile
           content={tile}
           onClick={() => onSetTiles(i)}
-          clickable={tiles[i] === null}
+          clickable={!gameStarted || tiles[i] === null}
           key={i}
         />
       ))}

@@ -13,7 +13,7 @@ export const RestartButton = ({ setTilesData, tilesDataEmpty }: RestartButtonPro
 
   return (
     <button onClick={onRestart}>
-      Restart
+      restart
     </button>
   );
 };

@@ -8,7 +8,7 @@ import { GameStatusMessage } from '../GameStatusMessage/GameStatusMessage.tsx';
 import { useLocalStorage } from '../../hooks/useLocalStorage.ts';
 
 const tilesDataEmpty: TilesData = {
-  tiles: Array.from({ length: 9 }) as TilesType,
+  tiles: Array.from({ length: 9 }).fill(null) as TilesType,
   tilesDisplay: null,
   currentPlayer: 'o',
   history: [],
@@ -17,6 +17,7 @@ const tilesDataEmpty: TilesData = {
 export const TicTacToe = () => {
   const [tilesData, setTilesData] = useLocalStorage('tilesData', tilesDataEmpty);
   const winner = getWinner(tilesData.tiles);
+  const isGameFinished = !tilesData.tiles.includes(null);
 
   // Use the custom hook for managing local storage on beforeunload
   useBeforeUnload(tilesData);
@@ -29,12 +30,13 @@ export const TicTacToe = () => {
     }}>
       <GameStatusMessage
         winner={winner}
+        isGameFinished={isGameFinished}
         currentPlayer={tilesData.currentPlayer}
       />
       <Tiles
         tiles={tilesData.tiles}
         tilesDisplay={tilesData.tilesDisplay}
-        setTilesData={setTilesData}
+        setTilesData={winner ? () => {} : setTilesData}
       />
       <BreadCrumbs
         tiles={tilesData.tiles}
@@ -49,8 +51,4 @@ export const TicTacToe = () => {
   );
 };
 
-// todo: fix setting state after victory
-// todo: fix non click after reset
-// todo: fix ts
 // todo: fix style
-// todo: refactor (especially this module)
