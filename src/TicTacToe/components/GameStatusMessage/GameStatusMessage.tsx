@@ -9,20 +9,15 @@ export const GameStatusMessage = ({
   isGameFinished,
   currentPlayer,
 }: GameStatusMessageProps) => {
-
-  let message: string;
-
   if (winner) {
-    message = `${winner} won!`;
-  } else {
-    if (isGameFinished) {
-      message = "nobody won :'(";
-    } else {
-      message = `player ${currentPlayer === 'x' ? 'o' : 'x'}, your move`;
-    }
+    return <h2>{winner} won!</h2>;
+  }
+
+  if (isGameFinished) {
+    return <h2>Nobody won :'(</h2>;
   }
 
   return (
-    <h2>{message}</h2>
+    <h2>Player {currentPlayer === 'x' ? 'o' : 'x'}, your move</h2>
   );
 };
