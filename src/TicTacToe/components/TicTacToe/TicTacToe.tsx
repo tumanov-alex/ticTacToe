@@ -1,13 +1,13 @@
 import { BreadCrumbs } from '../BreadCrumbs/BreadCrumbs.tsx';
 import { Tiles } from '../Tiles/Tiles.tsx';
 import { getWinner } from '../../helpers/getWinner.ts';
-import { TilesData, Tiles as TilesType } from '../../models.ts';
+import { GameState, Tiles as TilesType } from '../../models.ts';
 import { useBeforeUnload } from '../../hooks/useBeforeUnload.ts';
 import { RestartButton } from '../RestartButton/RestartButton.tsx';
-import { GameStatusMessage } from '../GameStatusMessage/GameStatusMessage.tsx';
+import { StatusMessage } from '../StatusMessage/StatusMessage.tsx';
 import { useLocalStorage } from '../../hooks/useLocalStorage.ts';
 
-const tilesDataEmpty: TilesData = {
+const gameStateInit: GameState = {
   tiles: Array.from({ length: 9 }).fill(null) as TilesType,
   tilesDisplay: null,
   currentPlayer: 'o',
@@ -15,12 +15,12 @@ const tilesDataEmpty: TilesData = {
 };
 
 export const TicTacToe = () => {
-  const [tilesData, setTilesData] = useLocalStorage('tilesData', tilesDataEmpty);
-  const winner = getWinner(tilesData.tiles);
-  const isGameFinished = !tilesData.tiles.includes(null);
+  const [gameState, setGameState] = useLocalStorage('gameState', gameStateInit);
+  const winner = getWinner(gameState.tiles);
+  const gameOver = !gameState.tiles.includes(null);
 
   // Use the custom hook for managing local storage on beforeunload
-  useBeforeUnload(tilesData);
+  useBeforeUnload(gameState);
 
   return (
     <div style={{
@@ -28,24 +28,24 @@ export const TicTacToe = () => {
       alignItems: 'center',
       flexDirection: 'column',
     }}>
-      <GameStatusMessage
+      <StatusMessage
         winner={winner}
-        isGameFinished={isGameFinished}
-        currentPlayer={tilesData.currentPlayer}
+        isGameFinished={gameOver}
+        currentPlayer={gameState.currentPlayer}
       />
       <Tiles
-        tiles={tilesData.tiles}
-        tilesDisplay={tilesData.tilesDisplay}
-        setTilesData={winner ? () => {} : setTilesData}
+        tiles={gameState.tiles}
+        tilesDisplay={gameState.tilesDisplay}
+        setTilesData={winner ? () => {} : setGameState}
       />
       <BreadCrumbs
-        tiles={tilesData.tiles}
-        history={tilesData.history}
-        setTilesData={setTilesData}
+        tiles={gameState.tiles}
+        history={gameState.history}
+        setTilesData={setGameState}
       />
       <RestartButton
-        setTilesData={setTilesData}
-        tilesDataEmpty={tilesDataEmpty}
+        setTilesData={setGameState}
+        tilesDataEmpty={gameStateInit}
       />
     </div>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Tile } from './Tile.tsx';
-import { Tiles as TilesType, TilesData, TilesDisplay } from '../../models.ts';
+import { Tiles as TilesType, GameState, TilesDisplay } from '../../models.ts';
 
 export interface TilesProps {
   tiles: TilesType;
   tilesDisplay: TilesDisplay;
-  setTilesData: React.Dispatch<React.SetStateAction<TilesData>>;
+  setTilesData: React.Dispatch<React.SetStateAction<GameState>>;
 }
 
 export const Tiles = ({
@@ -30,7 +30,7 @@ export const Tiles = ({
         tilesDisplay: null,
         currentPlayer: tiles[tileId],
         history: [...prevState.history, tileId],
-      } as TilesData;
+      } as GameState;
     });
   };
 

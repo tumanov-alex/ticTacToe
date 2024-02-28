@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { TilesData } from '../models.ts';
+import { GameState } from '../models.ts';
 
-export function useBeforeUnload(tilesData: TilesData) {
+export function useBeforeUnload(tilesData: GameState) {
   useEffect(() => {
-    const handleBeforeUnload = () => localStorage.setItem('tilesData', JSON.stringify(tilesData));
+    const handleBeforeUnload = () => localStorage.setItem('gameState', JSON.stringify(tilesData));
 
     window.addEventListener('beforeunload', handleBeforeUnload);
 

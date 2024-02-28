@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { TilesData } from '../models.ts';
+import { GameState } from '../models.ts';
 
-export function useLocalStorage(key: string, initialValue: TilesData) {
+export function useLocalStorage(key: string, initialValue: GameState) {
   const [storedValue, setStoredValue] = useState(() => {
 
     try {
@@ -15,7 +15,7 @@ export function useLocalStorage(key: string, initialValue: TilesData) {
     }
   });
 
-  const setValue = (value: TilesData) => {
+  const setValue = (value: GameState) => {
     try {
       setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));

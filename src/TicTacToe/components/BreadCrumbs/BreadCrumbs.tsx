@@ -1,11 +1,11 @@
 import React from 'react';
 import { BreadCrumb } from './BreadCrumb.tsx';
-import { Tiles, History, TilesDisplay, TilesData } from '../../models.ts';
+import { Tiles, History, TilesDisplay, GameState } from '../../models.ts';
 
 interface BreadCrumbsProps {
   tiles: Tiles;
   history: History;
-  setTilesData: React.Dispatch<React.SetStateAction<TilesData>>
+  setTilesData: React.Dispatch<React.SetStateAction<GameState>>
 }
 
 export const BreadCrumbs = ({ tiles, history, setTilesData }: BreadCrumbsProps) => {

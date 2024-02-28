@@ -4,7 +4,7 @@ interface GameStatusMessageProps {
   currentPlayer: string;
 }
 
-export const GameStatusMessage = ({
+export const StatusMessage = ({
   winner,
   isGameFinished,
   currentPlayer,

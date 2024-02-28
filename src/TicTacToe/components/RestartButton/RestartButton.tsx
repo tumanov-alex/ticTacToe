@@ -1,14 +1,14 @@
-import { TilesData } from '../../models.ts';
+import { GameState } from '../../models.ts';
 
 interface RestartButtonProps {
-  setTilesData: (t: TilesData) => void;
-  tilesDataEmpty: TilesData;
+  setTilesData: (t: GameState) => void;
+  tilesDataEmpty: GameState;
 }
 
 export const RestartButton = ({ setTilesData, tilesDataEmpty }: RestartButtonProps) => {
   const onRestart = () => {
     setTilesData(tilesDataEmpty);
-    localStorage.setItem('tilesData', JSON.stringify(tilesDataEmpty));
+    localStorage.setItem('gameState', JSON.stringify(tilesDataEmpty));
   };
 
   return (
