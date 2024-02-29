@@ -18,6 +18,6 @@ export const StatusMessage = ({
   }
 
   return (
-    <h2>Player {currentPlayer === 'x' ? 'o' : 'x'}, your move</h2>
+    <h2>player {currentPlayer === 'x' ? 'o' : 'x'}, your move</h2>
   );
 };
