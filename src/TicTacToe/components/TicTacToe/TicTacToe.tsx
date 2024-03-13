@@ -1,7 +1,7 @@
 import { BreadCrumbs } from '../BreadCrumbs/BreadCrumbs.tsx';
 import { Tiles } from '../Tiles/Tiles.tsx';
 import { getWinner } from '../../helpers/getWinner.ts';
-import { GameState, Tiles as TilesType } from '../../models.ts';
+import { GameState, Tile, Tiles as TilesType } from '../../models.ts';
 import { useBeforeUnload } from '../../hooks/useBeforeUnload.ts';
 import { RestartButton } from '../RestartButton/RestartButton.tsx';
 import { StatusMessage } from '../StatusMessage/StatusMessage.tsx';
@@ -17,8 +17,9 @@ const gameStateInit: GameState = {
 
 export const TicTacToe = () => {
   const [gameState, setGameState] = useLocalStorage('gameState', gameStateInit);
-  const winner = getWinner(gameState.tiles);
-  const allTilesFull = !gameState.tiles.includes(null);
+  const winner: Tile = getWinner(gameState.tiles);
+  const allTilesFull: boolean = !gameState.tiles.includes(null);
+  const noOp = () => {};
 
   // Use the custom hook for managing local storage on beforeunload
   useBeforeUnload(gameState);
@@ -35,14 +36,13 @@ export const TicTacToe = () => {
       }}>
         <StatusMessage
           winner={winner}
-          isGameFinished={winner || allTilesFull}
+          isGameFinished={winner ?? allTilesFull}
           currentPlayer={gameState.currentPlayer}
         />
         <Tiles
           tiles={gameState.tiles}
           tilesDisplay={gameState.tilesDisplay}
-          setTilesData={winner ? () => {
-          } : setGameState}
+          setTilesData={winner ? noOp : setGameState}
         />
         <BreadCrumbs
           tiles={gameState.tiles}

@@ -47,7 +47,7 @@ export const Tiles = ({
           content={tile}
           onClick={() => onSetTiles(i)}
           clickable={!gameStarted || tiles[i] === null}
-          key={i}
+          key={`${tile} ${i}`}
         />
       ))}
     </div>
